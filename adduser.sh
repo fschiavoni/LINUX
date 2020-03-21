@@ -30,7 +30,8 @@ do
 			echo "$username already exists!"
 			exit 1
 		else 
-			useradd -m -p $password $username
+			pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
+			useradd -m -p $pass $username
 			[ $? -eq 0 ] && echo "User - $username - has been added to the system." ||
 			echo "Failed to add the user - $username -"
 		fi
